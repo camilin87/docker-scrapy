@@ -31,6 +31,4 @@ Docker Images to run [Scrapy](https://scrapy.org/) jobs
 
 ### Publishing the images  
 
-    rake publish["scrapinghub"]
-    rake publish["scrapy"]
-    rake publish["scrapy-pymongo"]
+    rake publish_all
