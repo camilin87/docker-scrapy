@@ -1,3 +1,5 @@
+
+
 task :build, [:image_name] => [:clean] do |t, args|
     image_name = args[:image_name]
     raise "image_name required" unless image_name
@@ -31,4 +33,14 @@ end
 
 task :clean do
     rm_rf "gen"
+end
+
+task :publish, [:image_name] do |t, args|
+    image_name = args[:image_name]
+    raise "image_name required" unless image_name
+    full_image_name = "camilin87/#{image_name}"
+
+    sh %{
+        docker push #{full_image_name}
+    }
 end
