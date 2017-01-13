@@ -1,4 +1,16 @@
+task :build_all do
+    pwd = File.dirname(__FILE__)
+    requirements_dir = File.join(pwd, "./requirements/")
 
+     Dir.entries(requirements_dir)
+        .select {|entry|
+             File.directory? File.join(requirements_dir,entry) and !(entry =='.' || entry == '..') 
+        }
+        .each { |image_name|
+            Rake::Task["clean"].execute
+            Rake::Task["build"].execute(:image_name => image_name)
+        }
+end
 
 task :build, [:image_name] => [:clean] do |t, args|
     image_name = args[:image_name]
